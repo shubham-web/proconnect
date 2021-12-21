@@ -1,0 +1,120 @@
+ERROR - 2021-12-21 11:56:20 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'UNIQUE' at line 2
+ERROR - 2021-12-21 11:56:56 --> Duplicate column name 'password'
+ERROR - 2021-12-21 11:57:00 --> Duplicate column name 'password'
+ERROR - 2021-12-21 11:57:51 --> Duplicate column name 'password'
+ERROR - 2021-12-21 11:59:41 --> Unknown column 'email' in 'users'
+ERROR - 2021-12-21 12:13:49 --> You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '
+	CHANGE `last_name` `lastName`' at line 2
+ERROR - 2021-12-21 12:17:06 --> Table 'users' already exists
+CRITICAL - 2021-12-21 12:59:28 -->  is not a valid rule.
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(285): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('')
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('country', 'Country', NULL, Array, Array)
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(25): CodeIgniter\Controller->validate(Array)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2021-12-21 13:04:38 -->  is not a valid rule.
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(285): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('')
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'Email', NULL, Array, Array)
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(25): CodeIgniter\Controller->validate(Array)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2021-12-21 13:05:08 -->  is not a valid rule.
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(285): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('')
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'Email', NULL, Array, Array)
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(25): CodeIgniter\Controller->validate(Array)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2021-12-21 13:05:16 --> Email is not a valid rule.
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(285): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('Email')
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Validation\Validation.php(151): CodeIgniter\Validation\Validation->processRules('email', 'Email', NULL, Array, Array)
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Controller.php(160): CodeIgniter\Validation\Validation->run()
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(25): CodeIgniter\Controller->validate(Array)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#8 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#9 {main}
+CRITICAL - 2021-12-21 13:29:23 --> Allowed fields must be specified for model: App\Models\Users
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\BaseModel.php(1138): CodeIgniter\Database\Exceptions\DataException::forInvalidAllowedFields('App\\Models\\User...')
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\BaseModel.php(713): CodeIgniter\BaseModel->doProtectFields(Array)
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, false)
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\BaseModel.php(658): CodeIgniter\Model->insert(Array, false)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(45): CodeIgniter\BaseModel->save(Array)
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#6 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#7 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#9 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#10 {main}
+ERROR - 2021-12-21 13:30:11 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+CRITICAL - 2021-12-21 13:30:11 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\BaseModel.php(658): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(45): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#10 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+ERROR - 2021-12-21 13:30:47 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+CRITICAL - 2021-12-21 13:30:47 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\MySQLi\Connection.php(292): mysqli->query('INSERT INTO `us...', 0)
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\BaseConnection.php(670): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `us...')
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\BaseConnection.php(598): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `us...')
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Database\BaseBuilder.php(1759): CodeIgniter\Database\BaseConnection->query('INSERT INTO `us...', Array, false)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Model.php(239): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\BaseModel.php(738): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Model.php(620): CodeIgniter\BaseModel->insert(Array, false)
+#7 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\BaseModel.php(658): CodeIgniter\Model->insert(Array, false)
+#8 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(45): CodeIgniter\BaseModel->save(Array)
+#9 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#10 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#11 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#13 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#14 {main}
+ERROR - 2021-12-21 13:31:33 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:31:47 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:33:15 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+CRITICAL - 2021-12-21 13:33:15 --> Undefined variable: returnValie
+#0 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\app\Controllers\Auth.php(51): CodeIgniter\Debug\Exceptions->errorHandler(8, 'Undefined varia...', 'C:\\xampp\\htdocs...', 51, Array)
+#1 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(824): App\Controllers\Auth->register()
+#2 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(410): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#3 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\CodeIgniter.php(318): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\public\index.php(37): CodeIgniter\CodeIgniter->run()
+#5 C:\xampp\htdocs\wsc\practise\bootcamp\week2\pro-connect\backend\system\Commands\Server\rewrite.php(43): require_once('C:\\xampp\\htdocs...')
+#6 {main}
+ERROR - 2021-12-21 13:33:28 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:34:42 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:35:48 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:36:17 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:36:43 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:37:08 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:40:26 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:42:43 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:44:12 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:44:48 --> Duplicate entry 'xavier@wsc.com' for key 'email'
+ERROR - 2021-12-21 13:47:00 --> Duplicate entry 'xavier@wsc.com' for key 'email'

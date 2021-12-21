@@ -1,0 +1,45 @@
+Registration Form
+    First Name
+    Last Name
+    Country (dropdown)
+    Email
+    Mobile
+    DOB
+    Password / Confirm Password
+
+Login
+    Email / Mobile No.
+    Password
+
+Profile
+    Upload photo
+    Tagline / Heading of profile
+Add/Edit Experience
+    - Company Name
+    - Position / Title
+    - Start Date
+    - End Date / Currently Working
+Add/Edit Education
+    - College Name
+    - Degree / Diploma
+    - Specialisation
+    - Start Date
+    - End Date / Current Attending
+
+Dashboard / Feed
+    Create Post
+    - Text (no html)
+    - Photo / Video (multiple) — ensure that photo and video are not allowed together
+    - Likes
+
+Admin Dashboard
+    Login
+    Manage Users
+        - List of all users
+        - Activate/deactivate/delete user
+        - Download list of all users in CSV
+        - Upload new users via CSV
+    Manage Posts
+        - List of all posts
+        - Suspend any post
+        - Download list of all posts in CSV

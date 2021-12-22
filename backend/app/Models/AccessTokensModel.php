@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class Users extends Model
+class AccessTokensModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'users';
+    protected $table            = 'accesstokens';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["firstName", "lastName", "country", "email", "mobile", "dob", "password"];
+    protected $allowedFields    = ["type", "token", "targetUser", "ip", "lastUsedAt"];
 
     // Dates
     protected $useTimestamps = false;
@@ -40,34 +40,18 @@ class Users extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    // custom
-    public const VERIFIED = "VERIFIED";
-    public const UNVERIFIED = "UNVERIFIED";
-    public const SUSPENDED = "SUSPENDED";
-
-    public function canLogin($emailOrMobile, $usingEmail)
+    public function saveUserAuthToken($data)
     {
-        $fieldName = $usingEmail ? "email" : "mobile";
-        $fieldValue = $emailOrMobile;
 
-        $potentialUser = $this->where($fieldName, $fieldValue)->first(); // returns null if not found
+        // delete old tokens genereated for this ip
+        $userId = $data["targetUser"];
+        $this->where(["targetUser" => $userId, "ip" => $data["ip"]])->delete();
 
-        // check if it exists
-        if (is_null($potentialUser)) {
-            return ["error" => "No Such User Exists."];
-        }
-
-        // check if user is verified
-        if ($potentialUser["status"] !== self::VERIFIED) {
-            return ["error" => "This account is " . strtolower($potentialUser["status"]) . "."];
-        }
-
-
-        return [
-            "user" => $potentialUser
-        ];
-    }
-    public function addToken($token)
-    {
+        $this->save([
+            "type" => "USER_AUTH",
+            "token" => $data["token"],
+            "targetUser" => $userId,
+            "ip" => $data["ip"],
+        ]);
     }
 }

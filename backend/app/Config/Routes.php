@@ -34,9 +34,17 @@ $routes->setAutoRoute(false);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 
+// Auth APIs
 $routes->get("/auth", "Auth::index");
 $routes->post("/login", "Auth::login");
 $routes->post("/register", "Auth::register");
+
+
+// ADMIN APIs
+$routes->group("admin", ["filter" => "userauth"], function ($routes) {
+    $routes->get("users", "User::index"); // get all users
+    $routes->get("users/(:num)/(:num)", "User::index/$1/$2"); // admin/users/:offset/:limit
+});
 
 
 /*

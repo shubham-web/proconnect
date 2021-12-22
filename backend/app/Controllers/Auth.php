@@ -10,20 +10,89 @@ class Auth extends ResourceController
     public function __construct()
     {
         $this->model = model(\App\Models\Users::class);
+        $this->accessTokensModel = model(\App\Models\AccessTokensModel::class);
     }
-    // protected $helpers = ["form", "url"];
+    protected $helpers = ["dummy_data", "password", "pc_utility"];
     public function index()
     {
         return $this->respond([
             "message" => "You're at the wrong place!",
-            // "data" => $this->model->findAll(),
         ]);
     }
     public function login()
     {
+        // run basic validations such as required
+        $rules      = $this->basicLoginValidationRules();
+        $goodToGo   = $this->validate($rules);
+
+        if (!$goodToGo) {
+            return $this->respond([
+                "message"   => "There are some validation errors",
+                "errors"    => $this->validator->getErrors(),
+            ], 400);
+        }
+
+        $emailOrMobile      = $this->request->getVar("emailOrMobile");
+        $password           = $this->request->getVar("password");
+        $usingMobileNumber  = $this->validator->check($emailOrMobile, 'decimal');
+        $usingEmail         = !$usingMobileNumber;
+
+        // if user is using email to login then validate email
+        if ($usingEmail) {
+            $validEmail = $this->validator->check($emailOrMobile, "valid_email");
+            if (!$validEmail) {
+                return $this->respond([
+                    "message"   => "Invalid email address provided.",
+                    // "errors" => $this->validator->getErrors(),
+                ], 400);
+            }
+        }
+
+        $loginChecks = $this->model->canLogin($emailOrMobile, $usingEmail);
+
+        if (isset($loginChecks["error"])) {
+            return $this->respond([
+                "message" => $loginChecks["error"],
+            ], 400);
+        }
+        $targetUser = $loginChecks["user"];
+
+        // check password
+        if (!pc_match_password($password, $targetUser["password"])) {
+            // incorrect password
+            $field = $usingEmail ? "email" : "mobile number";
+            return $this->respond([
+                "message" => "Invalid " . $field . " or password entered.",
+            ], 403);
+        }
+
+        // all checks done
+        // -> create a token
+
+        $token = pc_random_token();
+        try {
+            $this->accessTokensModel->saveUserAuthToken([
+                // "type" => "USER_AUTH",
+                "token" => $token,
+                "targetUser" => $targetUser["id"],
+                "ip" => $this->request->getIPAddress(),
+            ]);
+        } catch (Exception $e) {
+            return $this->respond([
+                "message" => "An error occurred while logging in, please try again later.",
+                "error" => $e->getMessage(),
+            ], 500);
+        }
+
+
         return $this->respond([
-            "message" => "coming soon",
-        ]);
+            "success" => 1,
+            "message" => "Logged in successfully!",
+            "data" => [
+                "token" => $token,
+                "ip" => $this->request->getIPAddress()
+            ]
+        ], 200);
     }
     public function register()
     {
@@ -55,7 +124,7 @@ class Auth extends ResourceController
         $rowData["dob"] = strtotime($rowData["dob"]);
         $rowData["dob"] = date("Y-m-d", $rowData["dob"]);
 
-        $rowData["password"] = $this->hashPassword($rowData["password"]);
+        $rowData["password"] = pc_password_hash($rowData["password"]);
 
         // finally save it to db
         try {
@@ -76,6 +145,20 @@ class Auth extends ResourceController
     {
         $targetUser = $this->model->where(["email" => $email])->first(); // returns NULL if not exists
         return is_null($targetUser) === NULL ? false : $targetUser;
+    }
+
+    protected function basicLoginValidationRules()
+    {
+        return [
+            "emailOrMobile" => [
+                "label" => "Email or Mobile number",
+                "rules" => "required"
+            ],
+            "password" => [
+                "label" => "Password",
+                "rules" => "required|string"
+            ]
+        ];
     }
 
     protected function getRegistrationRules()
@@ -122,13 +205,5 @@ class Auth extends ResourceController
                 "rules" => "required|matches[password]",
             ]
         ];
-    }
-    protected function hashPassword($password)
-    {
-        return password_hash($password, PASSWORD_DEFAULT);
-    }
-    protected function matchPassword($password, $hash)
-    {
-        return password_verify($password, $hash);
     }
 }

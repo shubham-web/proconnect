@@ -26,7 +26,16 @@ class UserAuth implements FilterInterface
     public function before(RequestInterface $request, $arguments = null)
     {
         $response = service("response");
-        $authHeader = $request->hasHeader("Authorization");
+        $userModel = model(\App\Models\Users::class);
+        $accessTokensModel = model(\App\Models\AccessTokensModel::class);
+
+        if (is_null($arguments)) {
+            return $response->setStatusCode(401)->setJSON([
+                "message" => "Access role is not specified in filter for this route.",
+            ]);
+        }
+
+        $authHeader = $request->header("Authorization");
 
         if (is_null($authHeader)) {
             $response->setStatusCode(403);
@@ -34,10 +43,34 @@ class UserAuth implements FilterInterface
                 "message" => "Authorization token is required.",
             ]);
         }
-        $headerValue = $request->getHeaderLine('Authorization');
+        $headerValue = $authHeader->getValue();
         $token = trim(str_replace("Bearer", "", $headerValue));
 
-        $request->setHeader("userId", $token);
+
+        $potentialUser = $accessTokensModel->getUserIdFromToken($token);
+
+        if (isset($potentialUser["error"])) {
+            return $response->setStatusCode(403)->setJSON([
+                "message" => $potentialUser["error"]
+            ]);
+        }
+
+        $targetUser = $userModel->getActiveUser($potentialUser["userId"]);
+        if (isset($targetUser["error"])) {
+            return $response->setStatusCode(403)->setJSON([
+                "message" => $targetUser["error"]
+            ]);
+        }
+
+        if (!in_array($targetUser["user"]["role"], $arguments)) {
+            return $response->setStatusCode(403)->setJSON([
+                "message" => "You don't have required " . implode("and", $arguments) . " privileges.",
+            ]);
+        }
+
+        $request->setHeader("pc_user", json_encode($targetUser["user"]));
+        $request->setHeader("pc_user_id", $targetUser["user"]["id"]);
+
         return $request;
     }
 

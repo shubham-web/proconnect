@@ -90,14 +90,14 @@ class Auth extends ResourceController
             "message" => "Logged in successfully!",
             "data" => [
                 "token" => $token,
-                "ip" => $this->request->getIPAddress()
+                "targetUser" => pc_filter_keys($targetUser, ["firstName", "lastName", "role"])
             ]
         ], 200);
     }
     public function register()
     {
         // validate data
-        $rules = $this->getRegistrationRules();
+        $rules = self::getRegistrationRules();
         $goodToGo = $this->validate($rules);
 
         if (!$goodToGo) {
@@ -161,10 +161,10 @@ class Auth extends ResourceController
         ];
     }
 
-    protected function getRegistrationRules()
+    static function getRegistrationRules($returnOnly = [])
     {
         $requiredString = "required|string";
-        return [
+        $allRules = [
             "firstName" => [
                 "label" => "First Name",
                 'rules' => $requiredString,
@@ -191,7 +191,7 @@ class Auth extends ResourceController
             ],
             "dob" => [
                 "label" => "Date of Birth",
-                "rules" => "required|valid_date[d/m/Y]",
+                "rules" => "required|valid_date[d-m-Y]",
             ],
             "password" => [
                 "label" => "Password",
@@ -205,5 +205,19 @@ class Auth extends ResourceController
                 "rules" => "required|matches[password]",
             ]
         ];
+        if (count($returnOnly) === 0) {
+            return $allRules;
+        }
+        $filteredRules = [];
+        foreach ($returnOnly as $field) {
+            $filteredRules[$field] = $allRules[$field];
+        }
+        return $filteredRules;
+    }
+    public function noRoute()
+    {
+        return $this->respond([
+            "message" => "No such api endpoint found."
+        ]);
     }
 }

@@ -4,17 +4,17 @@ namespace App\Models;
 
 use CodeIgniter\Model;
 
-class AccessTokensModel extends Model
+class PostModel extends Model
 {
     protected $DBGroup          = 'default';
-    protected $table            = 'accesstokens';
+    protected $table            = 'posts';
     protected $primaryKey       = 'id';
     protected $useAutoIncrement = true;
     protected $insertID         = 0;
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["token", "targetUser", "ip", "lastUsedAt"];
+    protected $allowedFields    = ["userId", "likes", "text", "media", "status"];
 
     // Dates
     protected $useTimestamps = false;
@@ -39,28 +39,4 @@ class AccessTokensModel extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
-
-    public function saveUserAuthToken($data)
-    {
-
-        // delete old tokens genereated for this ip
-        $userId = $data["targetUser"];
-        $this->where(["targetUser" => $userId, "ip" => $data["ip"]])->delete();
-
-        $this->save([
-            "token" => $data["token"],
-            "targetUser" => $userId,
-            "ip" => $data["ip"],
-        ]);
-    }
-    public function getUserIdFromToken($token)
-    {
-        $accessTokenEntry = $this->where(["token" => $token])->first();
-        if (is_null($accessTokenEntry)) {
-            return ["error" => "Invalid token provided."];
-        }
-        return [
-            "userId" => $accessTokenEntry["targetUser"]
-        ];
-    }
 }

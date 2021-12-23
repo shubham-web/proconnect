@@ -32,7 +32,7 @@ $routes->setAutoRoute(false);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
+$routes->get('/', 'Auth::noRoute');
 
 // Auth APIs
 $routes->get("/auth", "Auth::index");
@@ -40,11 +40,50 @@ $routes->post("/login", "Auth::login");
 $routes->post("/register", "Auth::register");
 
 
-// ADMIN APIs
-$routes->group("admin", ["filter" => "userauth"], function ($routes) {
+/// Admin-end APIs
+$routes->group("admin", ["filter" => "checkauth:ADMIN"], function ($routes) {
     $routes->get("users", "User::index"); // get all users
     $routes->get("users/(:num)/(:num)", "User::index/$1/$2"); // admin/users/:offset/:limit
+    $routes->get("users/export", "User::export/csv");
+    $routes->post("users/import", "User::import");
+    $routes->put("user/(:num)", "User::update/$1");
+    $routes->delete("user/(:num)", "User::delete/$1");
+
+    $routes->get("posts", "Post::index");
+    $routes->get("posts/export", "Post::export/csv");
+    $routes->put("post/status", "Post::changePostStatus");
 });
+
+/// User-end APIs
+
+// Common
+$routes->group("", ["filter" => "checkauth:USER"], function ($routes) {
+    $routes->post("upload", "User::upload");
+    $routes->get("me", "User::me");
+    $routes->get("posts", "Post::feedPosts");
+    $routes->get("posts/(:num)/(:num)", "Post::feedPosts/$1/$2");
+});
+
+// Profile endpoints
+$routes->group("profile", ["filter" => "checkauth:USER"], function ($routes) {
+    $routes->get("/", "User::getProfileData");
+
+    $routes->post("experience", "User::addExperience");
+    $routes->post("education", "User::addEducation");
+
+    $routes->put("/", "User::updateProfile");
+    $routes->put("meta", "User::updateUserMeta");
+    $routes->put("experience/(:num)", "User::editExperience/$1");
+    $routes->put("education/(:num)", "User::editEducation/$1");
+});
+
+// Post endpoints
+$routes->group("/post", ["filter" => "checkauth:USER"], function ($routes) {
+    $routes->post("/", "Post::create");
+});
+
+// 404 route
+$routes->add("/(:any)", "Auth::noRoute");
 
 
 /*

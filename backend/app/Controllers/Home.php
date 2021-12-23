@@ -7,7 +7,7 @@ class Home extends BaseController
     public function index()
     {
         return $this->response->setJSON([
-            "message" => "nothing"
+            "message" => "No such api endpoint found."
         ]);
     }
 }

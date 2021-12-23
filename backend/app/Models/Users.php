@@ -14,7 +14,7 @@ class Users extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["firstName", "lastName", "country", "email", "mobile", "dob", "password"];
+    public $allowedFields    = ["firstName", "lastName", "country", "email", "mobile", "status", "dob", "password"];
 
     // Dates
     protected $useTimestamps = false;
@@ -51,23 +51,28 @@ class Users extends Model
         $fieldValue = $emailOrMobile;
 
         $potentialUser = $this->where($fieldName, $fieldValue)->first(); // returns null if not found
+        return $this->getActiveUser($potentialUser["id"]);
+    }
+    public function getActiveUser($userId)
+    {
+        if (!$userId) {
+            return ["error" => "No Such User Exists."];
+        }
+
+        $user = $this->find($userId);
 
         // check if it exists
-        if (is_null($potentialUser)) {
+        if (is_null($user)) {
             return ["error" => "No Such User Exists."];
         }
 
         // check if user is verified
-        if ($potentialUser["status"] !== self::VERIFIED) {
-            return ["error" => "This account is " . strtolower($potentialUser["status"]) . "."];
+        if ($user["status"] !== self::VERIFIED) {
+            return ["error" => "This account is " . strtolower($user["status"]) . "."];
         }
 
-
         return [
-            "user" => $potentialUser
+            "user" => $user
         ];
-    }
-    public function addToken($token)
-    {
     }
 }

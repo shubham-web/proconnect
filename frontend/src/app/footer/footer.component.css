@@ -1,0 +1,29 @@
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  width: 100%;
+  background: white;
+  align-items: center;
+  height: 60px;
+}
+.right {
+  justify-self: end;
+}
+.center {
+  justify-self: center;
+}
+.center button {
+  margin-right: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 1rem;
+  }
+  .footer > * {
+    justify-self: center;
+  }
+}

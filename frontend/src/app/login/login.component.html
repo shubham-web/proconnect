@@ -1,0 +1,35 @@
+<app-auth-form>
+  <form (ngSubmit)="submitForm()">
+    <h1>Welcome Back!</h1>
+    <h3>Sign in to continue to ProConnect!</h3>
+    <div class="formInput">
+      <mat-form-field appearance="outline">
+        <mat-label>Email or Phone Number</mat-label>
+        <input
+          [(ngModel)]="emailOrMobile"
+          matInput
+          name="emailOrMobile"
+          placeholder="eg. aakash.kumar@email.com"
+        />
+      </mat-form-field>
+    </div>
+    <div class="formInput">
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          [(ngModel)]="password"
+          type="password"
+          name="password"
+          matInput
+        />
+      </mat-form-field>
+    </div>
+    <div class="formInput">
+      <button color="primary" type="submit" mat-raised-button>Login</button>
+    </div>
+  </form>
+  <br />
+  <!-- <div class="links">
+    <a mat-flat-button routerLink="/register">Create an Account</a>
+  </div> -->
+</app-auth-form>

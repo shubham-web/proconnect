@@ -1,0 +1,11 @@
+.links {
+  display: flex;
+  justify-content: right;
+}
+
+.formInput {
+  width: 100%;
+}
+.formInput > * {
+  width: 100%;
+}

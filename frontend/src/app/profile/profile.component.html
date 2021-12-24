@@ -1,0 +1,34 @@
+<app-authcheck role="USER" redirectIfFails>
+  <mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
+  <mat-card class="profileSections" *ngIf="dataLoaded === true">
+    <mat-card-title>Basic Details</mat-card-title>
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <div class="basicDetails">
+        <div class="left">
+          <div class="dpUpload">
+            <img
+              src="https://i.picsum.photos/id/828/500/500.jpg?hmac=1ypSvCxi46m1LpIAin-N03Dc2SQac2wbjBP_D_56GJQ"
+              alt=""
+            />
+          </div>
+          <button mat-raised-button>Change Profile Picture</button>
+        </div>
+        <div class="details">
+          <mat-form-field>
+            <mat-label>First Name</mat-label>
+            <input
+              matInput
+              placeholder="First Name"
+              [(ngModel)]="basicDetails.firstName"
+            />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button color="primary" mat-button>Cancel</button>
+      <button color="primary" mat-raised-button>Save</button>
+    </mat-card-actions>
+  </mat-card>
+</app-authcheck>

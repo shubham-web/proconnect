@@ -1,0 +1,16 @@
+.authForm {
+  display: grid;
+  width: max-content;
+  margin: 0 auto;
+  border-radius: 5px;
+  background: white;
+  padding: 3rem 2.5rem 1rem;
+  border: 1px solid #26262620;
+  text-align: center;
+  min-width: 20vw;
+}
+.center {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+}

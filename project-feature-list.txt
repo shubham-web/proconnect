@@ -1,4 +1,4 @@
-Registration Form
+Registration Form  (✅ API | ⏳ UI)
     First Name
     Last Name
     Country (dropdown)
@@ -7,39 +7,124 @@ Registration Form
     DOB
     Password / Confirm Password
 
-Login
+===========================================================
+    
+Login (✅ API | ⏳ UI)
     Email / Mobile No.
     Password
 
-Profile
+===========================================================
+
+Profile  (✅ API | ⏳ UI)
     Upload photo
     Tagline / Heading of profile
-Add/Edit Experience
+
+===========================================================
+
+Add/Edit Experience (✅ API | ⏳ UI)
     - Company Name
     - Position / Title
     - Start Date
     - End Date / Currently Working
-Add/Edit Education
+
+===========================================================
+    
+Add/Edit Education                               (✅ API | ⏳ UI)
     - College Name
     - Degree / Diploma
     - Specialisation
     - Start Date
     - End Date / Current Attending
 
-Dashboard / Feed
-    Create Post
+===========================================================
+
+Dashboard / Feed 
+    Create Post                                 (✅ API | ⏳ UI)
     - Text (no html)
     - Photo / Video (multiple) — ensure that photo and video are not allowed together
     - Likes
 
+===========================================================
+
 Admin Dashboard
-    Login
-    Manage Users
-        - List of all users
-        - Activate/deactivate/delete user
-        - Download list of all users in CSV
-        - Upload new users via CSV
+    Login                                       (✅ API | ⏳ UI)
+    Manage Users 
+        - List of all users                     (✅ API | ⏳ UI)
+        - Activate / deactivate user            (✅ API | ⏳ UI)
+        - Delete user                           (✅ API | ⏳ UI)
+        - Download list of all users in CSV     (✅ API | ⏳ UI)
+        - Upload new users via CSV              (✅ API | ⏳ UI)
     Manage Posts
-        - List of all posts
-        - Suspend any post
-        - Download list of all posts in CSV
+        - List of all posts                     (✅ API | ⏳ UI)
+        - Suspend any post                      (✅ API | ⏳ UI)
+        - Download list of all posts in CSV     (✅ API | ⏳ UI)
+
+===========================================================
+
+
+
+
+
+
+
+
+
+Web Tech BootCamp | Week 2
+
+Task: Pro-Connect - a professional network for internal use of universities / colleges
+
+Registration Form
+1. First Name
+2. Last Name
+3. Country (dropdown)
+4. Email
+5. Mobile
+6. DOB
+7. Password / Confirm Password
+
+Login
+1. Email / Mobile No.
+2. Password
+
+User Profile
+1. Name
+2. Mobile
+3. City
+4. Password
+5. Upload photo
+6. Tagline / Heading of profile
+7. Add/Edit Experience
+    1. Company Name
+    2. Position / Title
+    3. Start Date
+    4. End Date / Currently Working
+8. Add/Edit Education
+    1. College Name
+    2. Degree / Diploma
+    3. Specialisation
+    4. Start Date
+    5. End Date / Current Attending
+
+
+User Feed
+1. Create Post
+    1. Text (no html)
+    2. Photo / Video (multiple) — ensure that photo and video are not allowed together
+    3. Likes
+2. List all posts in descending order or creation
+
+Admin Dashboard
+1. Login
+2. Manage Users
+    1. List of all users
+    2. Activate/deactivate/delete user
+    3. Download list of all users in CSV
+    4. Upload new users via CSV
+3. Manage Posts
+    1. List of all posts
+    2. Suspend any post
+    3. Download list of all posts in CSV
+
+
+10 posts at a time
+infinite loading

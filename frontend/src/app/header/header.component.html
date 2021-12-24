@@ -1,0 +1,18 @@
+<mat-toolbar class="pc_header" color="primary">
+  <div class="left">
+    <app-logo></app-logo>
+  </div>
+  <div class="center"></div>
+  <div class="right" *ngIf="auth.isLoggedIn() === false">
+    <a routerLink="/login" mat-button>Sign in</a>
+    <a routerLink="/register" color="primary" mat-raised-button>Register</a>
+  </div>
+  <div class="right" *ngIf="auth.isLoggedIn() === true">
+    Hi {{ auth.getCurrentUser().firstName }}!
+    <button mat-fab color="primary" [matMenuTriggerFor]="headerMenu">P</button>
+    <mat-menu #headerMenu="matMenu">
+      <a mat-menu-item routerLink="/profile">Profile</a>
+      <button mat-menu-item (click)="logout()">Logout</button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

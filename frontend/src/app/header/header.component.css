@@ -1,0 +1,20 @@
+.pc_header {
+  position: relative;
+  background: white;
+  color: #262626;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-content: space-between;
+  height: 80px;
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+}
+.left {
+  justify-self: start;
+  align-self: center;
+}
+.right {
+  justify-self: end;
+}
+.right > * {
+  margin-right: 1rem;
+}

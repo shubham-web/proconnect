@@ -1,0 +1,8 @@
+.pc_page {
+  padding: 2rem;
+  background: url("/assets/beanstalk.png");
+  min-height: calc(
+    100vh - 80px - 60px
+  ); /* page size - headerHeight - footerHeight  */
+  box-sizing: border-box;
+}

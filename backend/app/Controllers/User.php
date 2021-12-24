@@ -45,9 +45,7 @@ class User extends ResourceController
 
         return $this->respond([
             "success" => true,
-            "data" => [
-                $user
-            ]
+            "data" => $user
         ], 200);
     }
     public function getProfileData()
@@ -61,9 +59,7 @@ class User extends ResourceController
 
         return $this->respond([
             "success" => true,
-            "data" => [
-                $user
-            ]
+            "data" => $user
         ], 200);
     }
     public function updateProfile()

@@ -1,8 +1,10 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrService } from 'ngx-toastr';
 import { ApiService } from '../api.service';
 import { AppTitleService } from '../app-title.service';
 import { AuthService } from '../auth.service';
+import { Logger } from '../logger.service';
 import { ProfileService } from '../profile.service';
 
 interface ProfileData {
@@ -19,25 +21,6 @@ interface ProfileData {
     profileViews: number;
   };
 }
-interface EducationPopup {
-  institute: string;
-  course: string;
-  stream: string;
-  startDate: string;
-  endDate: string | null;
-}
-interface ExperiencePopup {
-  company: string;
-  title: string;
-  startDate: string;
-  endDate: string | null;
-}
-
-interface PopupConfig {
-  resource: string;
-  heading: string;
-  state: EducationPopup | ExperiencePopup;
-}
 
 @Component({
   selector: 'app-profile',
@@ -47,7 +30,7 @@ interface PopupConfig {
 export class ProfileComponent implements OnInit, OnChanges {
   dataLoaded = false;
   editMode = false;
-  popupOpened: boolean = true;
+  addEducationRow = false;
   profileData: ProfileData = {
     firstName: '',
     lastName: '',
@@ -62,29 +45,6 @@ export class ProfileComponent implements OnInit, OnChanges {
       profileViews: 0,
     },
   };
-  popups: {
-    education: EducationPopup;
-    experience: ExperiencePopup;
-  } = {
-    education: {
-      institute: '',
-      course: '',
-      stream: '',
-      startDate: '',
-      endDate: null,
-    },
-    experience: {
-      company: '',
-      title: '',
-      startDate: '',
-      endDate: null,
-    },
-  };
-  metaPopup: PopupConfig = {
-    resource: 'education',
-    heading: 'Add Education',
-    state: this.popups.education,
-  };
 
   initialData = this.profileData;
   metadata: object;
@@ -93,7 +53,8 @@ export class ProfileComponent implements OnInit, OnChanges {
     public profileService: ProfileService,
     private sb: MatSnackBar,
     private auth: AuthService,
-    private api: ApiService
+    private api: ApiService,
+    private toastr: ToastrService
   ) {}
   ngOnChanges(changes: SimpleChanges): void {
     console.log('changes', changes);
@@ -106,8 +67,19 @@ export class ProfileComponent implements OnInit, OnChanges {
       .then((response: { data: ProfileData }) => {
         console.log(response);
         if (response.data.metadata === null) {
-          console.log(this.profileData.metadata);
           response.data.metadata = this.profileData.metadata;
+        } else {
+          if (response.data.metadata.education.startsWith('[')) {
+            response.data.metadata.education = JSON.parse(
+              response.data.metadata.education
+            );
+          }
+          if (response.data.metadata.experience.startsWith('[')) {
+            response.data.metadata.experience = JSON.parse(
+              response.data.metadata.experience
+            );
+          }
+          console.log('response.data.metadata', response.data.metadata);
         }
         console.log(response.data);
         this.profileData = response.data;
@@ -123,7 +95,7 @@ export class ProfileComponent implements OnInit, OnChanges {
       });
   }
   cancelEdits() {
-    this.profileData = this.initialData;
+    this.profileData = JSON.parse(JSON.stringify(this.initialData));
     this.editMode = false;
   }
   saveEdits() {
@@ -172,6 +144,11 @@ export class ProfileComponent implements OnInit, OnChanges {
     input.click();
   }
   addEducation() {
-    this.popupOpened = true;
+    this.toastr.success('Changes Saved Successfully!', 'Success');
+
+    Logger.log('Changes Saved!!');
+  }
+  stringify(anything: any) {
+    return JSON.stringify(anything);
   }
 }

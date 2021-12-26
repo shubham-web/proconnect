@@ -2,143 +2,217 @@
   <ng-container *ngIf="dataLoaded === false">
     <mat-spinner></mat-spinner>
   </ng-container>
-  <mat-card class="profileSections" *ngIf="dataLoaded === true">
-    <mat-card-title
-      >Basic Details<button
-        *ngIf="!editMode"
-        color="primary"
-        mat-raised-button
-        (click)="editMode = !editMode"
-      >
-        Edit
-      </button>
-    </mat-card-title>
+  <div class="sections">
+    <mat-card class="profileSections" *ngIf="dataLoaded === true">
+      <mat-card-title
+        >Basic Details<button
+          *ngIf="!editMode"
+          color="primary"
+          mat-raised-button
+          (click)="editMode = !editMode"
+        >
+          Edit
+        </button>
+      </mat-card-title>
 
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <div class="basicDetails">
-        <div class="left">
-          <div class="dpUpload">
-            <img [src]="profileService.getDp(profileData.dp)" alt="" />
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <div class="basicDetails">
+          <div class="left">
+            <div class="dpUpload">
+              <img [src]="profileService.getDp(profileData.dp)" alt="" />
+            </div>
+
+            <button (click)="changeDp()" mat-raised-button>
+              Change Profile Picture
+            </button>
+            <br />
           </div>
+          <div class="details">
+            <mat-form-field>
+              <mat-label>Profile Header</mat-label>
+              <input
+                matInput
+                placeholder="Title at Company"
+                [(ngModel)]="profileData.profileHeader"
+                [readonly]="!editMode"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                placeholder="First Name"
+                [(ngModel)]="profileData.firstName"
+                [readonly]="!editMode"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Last Name</mat-label>
+              <input
+                matInput
+                placeholder="Last Name"
+                [(ngModel)]="profileData.lastName"
+                [readonly]="!editMode"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Date of Birth</mat-label>
+              <input
+                type="date"
+                matInput
+                placeholder=""
+                [(ngModel)]="profileData.dob"
+                [readonly]="!editMode"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Email</mat-label>
+              <input
+                type="email"
+                matInput
+                placeholder="Email"
+                [(ngModel)]="profileData.email"
+                disabled
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Mobile</mat-label>
+              <input
+                type="mobile"
+                matInput
+                placeholder="mobile"
+                [(ngModel)]="profileData.mobile"
+                disabled
+              />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions *ngIf="editMode">
+        <button (click)="cancelEdits()" color="primary" mat-button>
+          Cancel
+        </button>
+        <button (click)="saveEdits()" color="primary" mat-raised-button>
+          Save
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <br />
+    <mat-card class="profileSections" *ngIf="dataLoaded === true">
+      <mat-card-title
+        >Education<button
+          color="primary"
+          mat-raised-button
+          (click)="addEducation()"
+        >
+          Add
+        </button>
+      </mat-card-title>
 
-          <button (click)="changeDp()" mat-raised-button>
-            Change Profile Picture
-          </button>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <ng-container *ngIf="!!profileData.metadata.education === false">
           <br />
-        </div>
-        <div class="details">
-          <mat-form-field>
-            <mat-label>Profile Header</mat-label>
-            <input
-              matInput
-              placeholder="Title at Company"
-              [(ngModel)]="profileData.profileHeader"
-              [readonly]="!editMode"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>First Name</mat-label>
-            <input
-              matInput
-              placeholder="First Name"
-              [(ngModel)]="profileData.firstName"
-              [readonly]="!editMode"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Last Name</mat-label>
-            <input
-              matInput
-              placeholder="Last Name"
-              [(ngModel)]="profileData.lastName"
-              [readonly]="!editMode"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Date of Birth</mat-label>
-            <input
-              type="date"
-              matInput
-              placeholder=""
-              [(ngModel)]="profileData.dob"
-              [readonly]="!editMode"
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input
-              type="email"
-              matInput
-              placeholder="Email"
-              [(ngModel)]="profileData.email"
-              disabled
-            />
-          </mat-form-field>
-          <mat-form-field>
-            <mat-label>Mobile</mat-label>
-            <input
-              type="mobile"
-              matInput
-              placeholder="mobile"
-              [(ngModel)]="profileData.mobile"
-              disabled
-            />
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions *ngIf="editMode">
-      <button (click)="cancelEdits()" color="primary" mat-button>Cancel</button>
-      <button (click)="saveEdits()" color="primary" mat-raised-button>
-        Save
-      </button>
-    </mat-card-actions>
-  </mat-card>
-  <br />
-  <!--  <mat-card class="profileSections" *ngIf="dataLoaded === true">
-    <mat-card-title
-      >Education<button
-        *ngIf="!editMode"
-        color="primary"
-        mat-raised-button
-        (click)="addEducation()"
-      >
-        Add
-      </button>
-    </mat-card-title>
+          <mat-card style="box-shadow: none">
+            <h1>You haven't added education data yet.</h1>
+          </mat-card>
+        </ng-container>
+        <ng-container *ngIf="!!profileData.metadata.education !== false">
+          <table class="metaTable">
+            <thead>
+              <th>#</th>
+              <th>Institute</th>
+              <th>Course</th>
+              <th>Stream</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let edu of profileData.metadata.education;
+                  index as serial
+                "
+              >
+                <td>{{ serial + 1 }}</td>
+                <td>{{ edu.institute }}</td>
+                <td>{{ edu.course }}</td>
+                <td>{{ edu.stream }}</td>
+                <td>{{ edu.startDate }}</td>
+                <td>{{ edu.endDate ? edu.endDate : "-" }}</td>
+                <td><button mat-stroked-button>Edit</button></td>
+              </tr>
+              <tr *ngIf="addEducationRow === true">
+                <td>
+                  <mat-form-field>
+                    <mat-form-label>Institute</mat-form-label>
+                    <input matInput placeholder="Institute" />
+                  </mat-form-field>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+    <br />
+    <mat-card class="profileSections" *ngIf="dataLoaded === true">
+      <mat-card-title
+        >Experience<button
+          color="primary"
+          mat-raised-button
+          (click)="addEducation()"
+        >
+          Add
+        </button>
+      </mat-card-title>
 
-    <mat-divider></mat-divider>
-    <mat-card-content>
-      <ng-container *ngIf="!!profileData.metadata.education === false">
-        <br />
-        <mat-card style="box-shadow: none">
-          <h1>You haven't added education data yet.</h1>
-        </mat-card>
-      </ng-container>
-      <ng-container *ngIf="!!profileData.metadata.education !== false">
-        <table class="metaTable">
-          <thead>
-            <th>Institute</th>
-            <th>Course</th>
-            <th>Stream</th>
-            <th>Start Date</th>
-            <th>End Date</th>
-          </thead>
-          <tbody>
-            <tr></tr>
-          </tbody>
-        </table>
-      </ng-container>
-    </mat-card-content>
-    <mat-card-actions *ngIf="editMode">
-      <button (click)="cancelEdits()" color="primary" mat-button>Cancel</button>
-      <button (click)="saveEdits()" color="primary" mat-raised-button>
-        Save
-      </button>
-    </mat-card-actions>
-  </mat-card>
-  <div class="metadatapopup" *ngIf="popupOpened">
-    <div class="popupcontent"></div>
-  </div> -->
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <ng-container *ngIf="!!profileData.metadata.experience === false">
+          <br />
+          <mat-card style="box-shadow: none">
+            <h1>You haven't added Experience data yet.</h1>
+          </mat-card>
+        </ng-container>
+        <ng-container *ngIf="!!profileData.metadata.experience !== false">
+          <table class="metaTable">
+            <thead>
+              <th>#</th>
+              <th>Company</th>
+              <th>Job Title</th>
+              <th>Start Date</th>
+              <th>End Date</th>
+              <th>Actions</th>
+            </thead>
+            <tbody>
+              <tr
+                *ngFor="
+                  let edu of profileData.metadata.experience;
+                  index as serial
+                "
+              >
+                <td>{{ serial + 1 }}</td>
+                <td>{{ edu.company }}</td>
+                <td>{{ edu.title }}</td>
+                <td>{{ edu.startDate }}</td>
+                <td>{{ edu.endDate ? edu.endDate : "-" }}</td>
+                <td><button mat-stroked-button>Edit</button></td>
+              </tr>
+              <tr *ngIf="addEducationRow === true">
+                <td>
+                  <mat-form-field>
+                    <mat-form-label>Institute</mat-form-label>
+                    <input matInput placeholder="Institute" />
+                  </mat-form-field>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </ng-container>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </app-authcheck>

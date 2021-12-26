@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  logs: false,
   apiBase: 'http://localhost:8080',
   serverAssets: 'http://localhost:8080/',
 };

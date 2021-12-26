@@ -26,6 +26,7 @@ import { ManageusersComponent } from './manageusers/manageusers.component';
 import { SectionheaderComponent } from './sectionheader/sectionheader.component';
 import { CreatenewpostComponent } from './createnewpost/createnewpost.component';
 import { ManagepostsComponent } from './manageposts/manageposts.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,9 @@ import { ManagepostsComponent } from './manageposts/manageposts.component';
     BrowserModule,
     CommonModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-center',
+    }),
     FormsModule,
     AppRoutingModule,
     MaterialModule,

@@ -39,8 +39,20 @@
 .mat-card-title {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .metaTable {
   min-width: min-content;
   box-shadow: none;
+  width: 100%;
+}
+
+.metaDataPopup {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  background: #26262650;
+  width: 100%;
+  height: 100%;
 }

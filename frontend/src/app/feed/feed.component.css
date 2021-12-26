@@ -48,3 +48,22 @@
   display: grid;
   gap: 1rem;
 }
+
+.likeCount {
+  padding: 1rem;
+}
+.userImage {
+  width: 100px;
+  height: 100px;
+  display: block;
+  border-radius: 50%;
+  background-size: cover;
+  border: 2px solid teal;
+  margin: 0 auto;
+}
+.userProfile {
+  display: grid;
+  justify-content: center;
+  text-align: center;
+  gap: 1rem;
+}

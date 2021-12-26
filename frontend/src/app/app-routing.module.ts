@@ -4,6 +4,7 @@ import { AdminComponent } from './admin/admin.component';
 import { FeedComponent } from './feed/feed.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { ManagepostsComponent } from './manageposts/manageposts.component';
 import { ManageusersComponent } from './manageusers/manageusers.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -35,6 +36,10 @@ let routes: Routes = [
   {
     path: 'admin/users',
     component: ManageusersComponent,
+  },
+  {
+    path: 'admin/posts',
+    component: ManagepostsComponent,
   },
   {
     path: 'profile',

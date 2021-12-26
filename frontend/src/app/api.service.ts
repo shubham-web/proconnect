@@ -56,4 +56,7 @@ export class ApiService {
       })
       .toPromise();
   }
+  getServerUrl(path: string) {
+    return environment.serverAssets.concat(path);
+  }
 }

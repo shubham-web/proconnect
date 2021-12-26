@@ -1,0 +1,77 @@
+<app-authcheck role="ADMIN" redirectIfFails>
+  <app-sectionheader title="Manage Posts"> </app-sectionheader>
+
+  <ng-container *ngIf="posts">
+    <div class="statistics">
+      <div>
+        <h2>Total Posts: {{ total }}</h2>
+      </div>
+      <div class="right">
+        <!-- <button (click)="import()" mat-raised-button>Import CSV</button> -->
+        <button (click)="export()" mat-raised-button>Export CSV</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <th>Id</th>
+        <th>User</th>
+        <th>Text</th>
+        <th>Likes</th>
+        <th>Status</th>
+        <th>Posted On</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of posts; index as serial">
+          <td>{{ serial + 1 + (currentPage - 1) * pageSize }}</td>
+          <td>{{ post.user.firstName }} {{ post.user.lastName }}</td>
+          <td>{{ shorten(post.text) }}</td>
+          <td>{{ countLikes(post.likes) }}</td>
+          <td>{{ post.status }}</td>
+          <td>{{ formatDate(post.createdAt) }}</td>
+          <td>
+            <button
+              [matMenuTriggerFor]="userOptions"
+              class="actionButton"
+              color="warn"
+              mat-mini-fab
+            >
+              <div class="threeDots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
+            <mat-menu #userOptions="matMenu">
+              <ng-container *ngIf="post.status === 'ACTIVE'">
+                <button
+                  (click)="toggleStatus(post.id)"
+                  color="warn"
+                  mat-menu-item
+                >
+                  Suspend Post
+                </button>
+              </ng-container>
+              <ng-container *ngIf="post.status === 'SUSPENDED'">
+                <button
+                  (click)="toggleStatus(post.id)"
+                  color="warn"
+                  mat-menu-item
+                >
+                  Mark as Active
+                </button>
+              </ng-container>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <mat-paginator
+      (page)="onPageChange($event)"
+      hidePageSize
+      [length]="total"
+      [pageSize]="pageSize"
+    ></mat-paginator>
+  </ng-container>
+</app-authcheck>

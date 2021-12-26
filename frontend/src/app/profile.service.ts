@@ -24,4 +24,12 @@ export class ProfileService {
       })
       .toPromise();
   }
+  getDp(url: any, backgroundImage = false) {
+    if (url) {
+      url = this.api.getServerUrl(url);
+    } else {
+      url = '/assets/demo-user.jpg';
+    }
+    return backgroundImage ? `url("${url}")` : url;
+  }
 }

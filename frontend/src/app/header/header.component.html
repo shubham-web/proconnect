@@ -15,9 +15,13 @@
   </div>
   <div class="right" *ngIf="auth.isLoggedIn() === true">
     Hi {{ auth.getCurrentUser().firstName }}!
-    <button mat-mini-fab color="primary" [matMenuTriggerFor]="headerMenu">
-      P
-    </button>
+    <span
+      class="profileIcon"
+      [style.background-image]="
+        profileService.getDp(auth.getCurrentUser().dp, true)
+      "
+      [matMenuTriggerFor]="headerMenu"
+    ></span>
     <mat-menu #headerMenu="matMenu">
       <ng-container *ngIf="auth.getCurrentUser().role === 'USER'">
         <a mat-menu-item routerLink="/profile">Profile</a>

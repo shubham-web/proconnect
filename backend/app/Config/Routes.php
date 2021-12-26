@@ -50,8 +50,10 @@ $routes->group("admin", ["filter" => "checkauth:ADMIN"], function ($routes) {
     $routes->delete("user/(:num)", "User::delete/$1");
 
     $routes->get("posts", "Post::index");
+    $routes->get("posts/(:num)/(:num)", "Post::index/$1/$2"); // admin/posts/:offset/:limit
+    $routes->put("post/(:num)", "Post::update/$1");
     $routes->get("posts/export", "Post::export/csv");
-    $routes->put("post/status", "Post::changePostStatus");
+    // $routes->put("post/status", "Post::changePostStatus");
 });
 
 /// User-end APIs
@@ -59,9 +61,11 @@ $routes->group("admin", ["filter" => "checkauth:ADMIN"], function ($routes) {
 // Common
 $routes->group("", ["filter" => "checkauth:USER"], function ($routes) {
     $routes->post("upload", "User::upload");
-    $routes->get("me", "User::me");
+    $routes->get("me", "User::me", ["filter" => "checkauth:USER, ADMIN"]);
     $routes->get("posts", "Post::feedPosts");
+    $routes->get("connections", "User::connections");
     $routes->get("posts/(:num)/(:num)", "Post::feedPosts/$1/$2");
+    $routes->get("post/like/(:num)", "Post::likePost/$1");
 });
 
 // Profile endpoints
@@ -80,7 +84,10 @@ $routes->group("profile", ["filter" => "checkauth:USER"], function ($routes) {
 // Post endpoints
 $routes->group("/post", ["filter" => "checkauth:USER"], function ($routes) {
     $routes->post("/", "Post::create");
+    $routes->delete("(:num)", "Post::delete/$1");
 });
+
+$routes->add("/beat", "Home::index");
 
 // 404 route
 $routes->add("/(:any)", "Auth::noRoute");

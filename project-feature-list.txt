@@ -9,19 +9,19 @@ Registration Form  (✅ API | ⏳ UI)
 
 ===========================================================
     
-Login (✅ API | ⏳ UI)
+Login (✅ API | ✅ UI)
     Email / Mobile No.
     Password
 
 ===========================================================
 
-Profile  (✅ API | ⏳ UI)
+Profile  (✅ API | ✅ UI)
     Upload photo
     Tagline / Heading of profile
 
 ===========================================================
 
-Add/Edit Experience (✅ API | ⏳ UI)
+Add/Edit Experience                             (✅ API | ⏳ UI)
     - Company Name
     - Position / Title
     - Start Date
@@ -39,25 +39,25 @@ Add/Edit Education                               (✅ API | ⏳ UI)
 ===========================================================
 
 Dashboard / Feed 
-    Create Post                                 (✅ API | ⏳ UI)
-    - Text (no html)
+    Create Post                                 (✅ API | ✅ UI)
+    - Text (no html)                            (✅ API | ✅ UI)
     - Photo / Video (multiple) — ensure that photo and video are not allowed together
     - Likes
 
 ===========================================================
 
 Admin Dashboard
-    Login                                       (✅ API | ⏳ UI)
+    Login                                       (✅ API | ✅ UI)
     Manage Users 
-        - List of all users                     (✅ API | ⏳ UI)
-        - Activate / deactivate user            (✅ API | ⏳ UI)
-        - Delete user                           (✅ API | ⏳ UI)
-        - Download list of all users in CSV     (✅ API | ⏳ UI)
-        - Upload new users via CSV              (✅ API | ⏳ UI)
+        - List of all users                     (✅ API | ✅ UI)
+        - Activate / deactivate user            (✅ API | ✅ UI)
+        - Delete user                           (✅ API | ✅ UI)
+        - Download list of all users in CSV     (✅ API | ✅ UI)
+        - Upload new users via CSV              (✅ API | ✅ UI)
     Manage Posts
-        - List of all posts                     (✅ API | ⏳ UI)
-        - Suspend any post                      (✅ API | ⏳ UI)
-        - Download list of all posts in CSV     (✅ API | ⏳ UI)
+        - List of all posts                     (✅ API | ✅ UI)
+        - Suspend any post                      (✅ API | ✅ UI)
+        - Download list of all posts in CSV     (✅ API | ✅ UI)
 
 ===========================================================
 
@@ -124,7 +124,6 @@ Admin Dashboard
     1. List of all posts
     2. Suspend any post
     3. Download list of all posts in CSV
-
 
 10 posts at a time
 infinite loading

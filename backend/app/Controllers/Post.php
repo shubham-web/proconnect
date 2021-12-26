@@ -9,6 +9,7 @@ class Post extends ResourceController
     public function __construct()
     {
         $this->postModel = model(\App\Models\PostModel::class);
+        $this->userModel = model(\App\Models\Users::class);
     }
     protected $helpers = ["pc_utility"];
 
@@ -17,12 +18,28 @@ class Post extends ResourceController
      *
      * @return mixed
      */
-    public function index()
+    public function index($offset = 0, $limit = null)
     {
+        // $userId = $this->request->getHeaderLine("pc_user");
+        $posts = $this->postModel
+            ->orderBy("createdAt", "DESC")
+            ->offset($offset)
+            ->limit($limit)
+            ->find(); // not findAll
+
+        $posts = array_map(function ($post) {
+            $post["user"] = $this->userModel->select("firstName, lastName")->find($post["userId"]);
+            return $post;
+        }, $posts);
         return $this->respond([
-            "success" => true,
-            "data" => $this->postModel->findAll(),
-        ]);
+            "success" => 1,
+            "data" => [
+                "posts" => $posts,
+                "offset" => $offset,
+                "limit" => $limit,
+                "total" => $this->postModel->countAll(),
+            ],
+        ], 200);
     }
     public function export($format = "csv")
     {
@@ -60,32 +77,26 @@ class Post extends ResourceController
 
         return $this->response->download("posts.csv", $csvFileContent);
     }
-    public function changePostStatus()
-    {
-        $postId = $this->request->getJsonVar("id");
-        $newStatus = $this->request->getJsonVar("status");
-        try {
-            $this->postModel->update($postId, [
-                "status" => $newStatus,
-            ]);
-        } catch (\Exception $e) {
-            return $this->respond([
-                "message" => $e->getMessage(),
-            ], 500);
-        }
-
-        return $this->respond([
-            "message" => "Post updated successfully.",
-        ]);
-    }
     public function feedPosts($offset = 0, $limit = null)
     {
+        $userId =  $this->request->getHeaderLine("pc_user_id");
         $posts = $this->postModel
+            ->select("id, userId, text, media, likes, createdAt")
+            ->orderBy('createdAt', 'DESC')
             ->offset($offset)
             ->limit($limit)
-            ->select("id, userId, text, media, likes")
             ->where("status !=", "SUSPENDED")
             ->find();
+
+        $posts = array_map(function ($post) use ($userId) {
+            $post["media"] = json_decode($post["media"], true);
+            $post["user"] = $this->userModel->select("firstName, lastName, profileHeader, dp")->find($post["userId"]);
+            $post["selfPost"] = $userId === $post["userId"];
+            if (isset($post['likes'])) {
+                $post["liked"] = in_array($userId, explode(",", $post['likes']));
+            }
+            return $post;
+        }, $posts);
         return $this->respond([
             "success" => true,
             "data" => $posts
@@ -167,7 +178,21 @@ class Post extends ResourceController
      */
     public function update($id = null)
     {
-        //
+        $postId = $id;
+        $newStatus = $this->request->getJsonVar("status");
+        try {
+            $this->postModel->update($postId, [
+                "status" => $newStatus,
+            ]);
+        } catch (\Exception $e) {
+            return $this->respond([
+                "message" => $e->getMessage(),
+            ], 500);
+        }
+
+        return $this->respond([
+            "message" => "Post updated successfully.",
+        ]);
     }
 
     /**
@@ -177,6 +202,45 @@ class Post extends ResourceController
      */
     public function delete($id = null)
     {
-        //
+        $this->postModel->where("id", $id)->delete();
+        return $this->respond([
+            "success" => true,
+            "message" => "Post Deleted Successfully!",
+        ], 200);
+    }
+    public function likePost($postId = null)
+    {
+        $userId = $this->request->getHeaderLine("pc_user_id");
+        $post = $this->postModel->where("id", $postId)->select("likes")->first();
+        if (!$post) {
+            return $this->respond([
+                "message" => "No such post exists",
+            ], 400);
+        }
+        $exLikes = explode(",", $post["likes"]);
+        $alreadyLiked = in_array($userId, $exLikes);
+        if ($alreadyLiked) {
+            $exLikes = array_filter($exLikes, function ($personUserId) use ($userId) {
+                return strval($userId) !== strval($personUserId);
+            });
+        } else {
+            if (count($exLikes) === 1 && $exLikes[0] === "") {
+                $exLikes = [$userId];
+            } else {
+                array_push($exLikes, $userId);
+            }
+        }
+
+        $exLikes = implode(",", $exLikes);
+        $this->postModel->update($postId, [
+            "likes" => $exLikes,
+        ]);
+        return $this->respond([
+            "sucess" => true,
+            "message" => $alreadyLiked ? "Undone like action" : "Liked the post",
+            "data" => [
+                "likes" => $exLikes,
+            ]
+        ], 200);
     }
 }

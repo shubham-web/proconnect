@@ -3,9 +3,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { ApiService } from '../api.service';
 import { AppTitleService } from '../app-title.service';
 import { AuthService } from '../auth.service';
 import { PostsService } from '../posts.service';
+import { ProfileService } from '../profile.service';
 
 @Component({
   selector: 'app-feed',
@@ -21,7 +23,9 @@ export class FeedComponent implements OnInit {
     private sb: MatSnackBar,
     private app: AppTitleService,
     public auth: AuthService,
-    private postService: PostsService
+    private postService: PostsService,
+    private profileService: ProfileService,
+    public api: ApiService
   ) {}
   userUri = 'https://bellfund.ca/wp-content/uploads/2018/03/demo-user.jpg';
   ngOnInit(): void {
@@ -69,7 +73,20 @@ export class FeedComponent implements OnInit {
       })
       .catch(console.log);
   }
-  getServerUrl(path: string) {
-    return environment.serverAssets.concat(path);
+  likePost(postId) {
+    let targetPost = this.posts.find((post) => post.id === postId);
+    this.postService
+      .likePost(postId)
+      .then((response: any) => {
+        targetPost.likes = response.data.likes;
+        targetPost.liked = !targetPost.liked;
+      })
+      .catch(console.log);
+  }
+  countLikes(likes: string = '') {
+    if (!likes) {
+      return 0;
+    }
+    return likes.split(',').length;
   }
 }

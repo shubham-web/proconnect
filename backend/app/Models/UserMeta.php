@@ -14,7 +14,7 @@ class UserMeta extends Model
     protected $returnType       = 'array';
     protected $useSoftDeletes   = false;
     protected $protectFields    = true;
-    protected $allowedFields    = ["userId", "dp", "profileHeader", "experience", "education", "profileViews"];
+    protected $allowedFields    = ["userId", "experience", "education", "profileViews"];
     // Dates
     protected $useTimestamps = false;
     protected $dateFormat    = 'datetime';

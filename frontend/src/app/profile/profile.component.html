@@ -1,5 +1,7 @@
 <app-authcheck role="USER" redirectIfFails>
-  <mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
+  <ng-container *ngIf="dataLoaded === false">
+    <mat-spinner></mat-spinner>
+  </ng-container>
   <mat-card class="profileSections" *ngIf="dataLoaded === true">
     <mat-card-title
       >Basic Details<button
@@ -17,15 +19,13 @@
       <div class="basicDetails">
         <div class="left">
           <div class="dpUpload">
-            <img
-              src="https://i.picsum.photos/id/828/500/500.jpg?hmac=1ypSvCxi46m1LpIAin-N03Dc2SQac2wbjBP_D_56GJQ"
-              alt=""
-            />
+            <img [src]="profileService.getDp(profileData.dp)" alt="" />
           </div>
 
-          <button *ngIf="editMode" mat-raised-button>
+          <button (click)="changeDp()" mat-raised-button>
             Change Profile Picture
           </button>
+          <br />
         </div>
         <div class="details">
           <mat-form-field>
@@ -95,4 +95,50 @@
       </button>
     </mat-card-actions>
   </mat-card>
+  <br />
+  <!--  <mat-card class="profileSections" *ngIf="dataLoaded === true">
+    <mat-card-title
+      >Education<button
+        *ngIf="!editMode"
+        color="primary"
+        mat-raised-button
+        (click)="addEducation()"
+      >
+        Add
+      </button>
+    </mat-card-title>
+
+    <mat-divider></mat-divider>
+    <mat-card-content>
+      <ng-container *ngIf="!!profileData.metadata.education === false">
+        <br />
+        <mat-card style="box-shadow: none">
+          <h1>You haven't added education data yet.</h1>
+        </mat-card>
+      </ng-container>
+      <ng-container *ngIf="!!profileData.metadata.education !== false">
+        <table class="metaTable">
+          <thead>
+            <th>Institute</th>
+            <th>Course</th>
+            <th>Stream</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+          </thead>
+          <tbody>
+            <tr></tr>
+          </tbody>
+        </table>
+      </ng-container>
+    </mat-card-content>
+    <mat-card-actions *ngIf="editMode">
+      <button (click)="cancelEdits()" color="primary" mat-button>Cancel</button>
+      <button (click)="saveEdits()" color="primary" mat-raised-button>
+        Save
+      </button>
+    </mat-card-actions>
+  </mat-card>
+  <div class="metadatapopup" *ngIf="popupOpened">
+    <div class="popupcontent"></div>
+  </div> -->
 </app-authcheck>

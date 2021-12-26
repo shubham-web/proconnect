@@ -1,7 +1,20 @@
 <app-authcheck role="USER" redirectIfFails>
   <div class="feed">
     <div class="left" *ngIf="auth.isLoggedIn()">
-      <mat-card>Hi {{ auth.getCurrentUser().firstName }}!</mat-card>
+      <mat-card class="userProfile">
+        <h2>Your Profile</h2>
+        <span
+          class="userImage"
+          [style.background-image]="
+            profileService.getDp(auth.getCurrentUser().dp, true)
+          "
+        ></span>
+        <h3>
+          {{ auth.getCurrentUser().firstName }}
+          {{ auth.getCurrentUser().lastName }}
+        </h3>
+        <a routerLink="/profile" mat-stroked-button>Edit Profile</a>
+      </mat-card>
     </div>
     <div class="center">
       <app-createnewpost></app-createnewpost>
@@ -15,7 +28,9 @@
         <mat-card class="example-card" *ngFor="let post of posts">
           <mat-card-header>
             <div
-              [style.background-image]="'url(' + userUri + ')'"
+              [style.background-image]="
+                profileService.getDp(post.user.dp, true)
+              "
               mat-card-avatar
               class="example-header-image"
             ></div>
@@ -23,7 +38,9 @@
               >{{ post.user.firstName }}
               {{ post.user.lastName }}</mat-card-title
             >
-            <mat-card-subtitle>{{ post.user.profileHeader }}</mat-card-subtitle>
+            <mat-card-subtitle>{{
+              post.user.profileHeader || post.createdAt
+            }}</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
             <p>
@@ -38,7 +55,7 @@
             "
           >
             <img
-              [src]="getServerUrl(image.url)"
+              [src]="api.getServerUrl(image.url)"
               alt="Image video"
               *ngFor="let image of post.media.images"
             />
@@ -46,7 +63,7 @@
               [controls]="true"
               [muted]="true"
               [autoplay]="true"
-              [src]="getServerUrl(video.url)"
+              [src]="api.getServerUrl(video.url)"
               alt="Post video"
               *ngFor="let video of post.media.video"
             ></video>
@@ -55,8 +72,16 @@
           <mat-divider></mat-divider>
           <mat-card-actions class="actions">
             <div>
-              <button mat-button>LIKE</button>
-              <span mat-caption>{{ post.likes }}</span>
+              <button
+                [color]="post.liked ? 'primary' : 'accent'"
+                (click)="likePost(post.id)"
+                mat-stroked-button
+              >
+                {{ post.liked ? "Liked" : "Like" }}
+              </button>
+              <span class="likeCount" mat-caption>{{
+                countLikes(post.likes)
+              }}</span>
             </div>
             <div *ngIf="post.selfPost">
               <button (click)="deletePost(post.id)" mat-stroked-button>

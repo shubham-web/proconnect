@@ -191,7 +191,7 @@ class Auth extends ResourceController
             ],
             "dob" => [
                 "label" => "Date of Birth",
-                "rules" => "required|valid_date[d-m-Y]",
+                "rules" => "required" /* |valid_date[d-m-Y] */,
             ],
             "password" => [
                 "label" => "Password",
@@ -210,7 +210,9 @@ class Auth extends ResourceController
         }
         $filteredRules = [];
         foreach ($returnOnly as $field) {
-            $filteredRules[$field] = $allRules[$field];
+            if (isset($allRules[$field])) {
+                $filteredRules[$field] = $allRules[$field];
+            }
         }
         return $filteredRules;
     }

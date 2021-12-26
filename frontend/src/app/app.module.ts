@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -24,6 +25,7 @@ import { AdminComponent } from './admin/admin.component';
 import { ManageusersComponent } from './manageusers/manageusers.component';
 import { SectionheaderComponent } from './sectionheader/sectionheader.component';
 import { CreatenewpostComponent } from './createnewpost/createnewpost.component';
+import { ManagepostsComponent } from './manageposts/manageposts.component';
 
 @NgModule({
   declarations: [
@@ -44,9 +46,11 @@ import { CreatenewpostComponent } from './createnewpost/createnewpost.component'
     ManageusersComponent,
     SectionheaderComponent,
     CreatenewpostComponent,
+    ManagepostsComponent,
   ],
   imports: [
     BrowserModule,
+    CommonModule,
     BrowserAnimationsModule,
     FormsModule,
     AppRoutingModule,

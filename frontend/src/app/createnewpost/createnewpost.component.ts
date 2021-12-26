@@ -65,7 +65,7 @@ export class CreatenewpostComponent implements OnInit {
     input.accept = type === 'images' ? 'image/*' : 'video/mp4';
     input.addEventListener('change', () => {
       let files = input.files;
-      this.media[type] = [...files];
+      this.media[type] = Array.from(files);
       console.log(this.media);
     });
     input.click();

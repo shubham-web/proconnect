@@ -23,6 +23,7 @@
   height: 200px;
   border-radius: 50%;
   overflow: hidden;
+  border: 2px solid #26262620;
 }
 .dpUpload img {
   width: 100%;
@@ -38,4 +39,8 @@
 .mat-card-title {
   display: flex;
   justify-content: space-between;
+}
+.metaTable {
+  min-width: min-content;
+  box-shadow: none;
 }

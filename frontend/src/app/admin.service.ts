@@ -34,9 +34,30 @@ export class AdminService {
       )
       .toPromise();
   }
+  fetchPosts(pageSize: number, currentPage: number) {
+    let offset = pageSize * (currentPage - 1);
+    let limit = pageSize;
+    return this.http
+      .get(
+        this.api.getEndpoint(
+          false ? `admin/posts` : `admin/posts/${offset}/${limit}`
+        ),
+        {
+          headers: { ...this.api.getAuthHeaders() },
+        }
+      )
+      .toPromise();
+  }
   changeUserStatus(userId, updatedData) {
     return this.http
       .put(this.api.getEndpoint(`admin/user/${userId}`), updatedData, {
+        headers: { ...this.api.getAuthHeaders() },
+      })
+      .toPromise();
+  }
+  changePostStatus(postId, updatedData) {
+    return this.http
+      .put(this.api.getEndpoint(`admin/post/${postId}`), updatedData, {
         headers: { ...this.api.getAuthHeaders() },
       })
       .toPromise();

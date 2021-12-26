@@ -17,6 +17,7 @@ class User extends ResourceController
     {
         $this->userModel = model(\App\Models\Users::class);
         $this->userMeta = model(\App\Models\UserMeta::class);
+        $this->validator = service("validation");
     }
     protected $helpers = ["form", "pc_utility"];
     public function index($offset = 0, $limit = null)
@@ -41,7 +42,7 @@ class User extends ResourceController
     public function me()
     {
         $userId = $this->request->getHeaderLine("pc_user_id");
-        $user = $this->userModel->select("firstName, role")->find($userId);
+        $user = $this->userModel->select("firstName, lastName, role, dp")->find($userId);
 
         return $this->respond([
             "success" => true,
@@ -52,10 +53,13 @@ class User extends ResourceController
     {
         $userId = $this->request->getHeaderLine("pc_user_id");
         $user = $this->userModel
-            ->select("id, firstName, lastName, email, mobile, dob")
+            ->select("id, firstName, lastName, email, mobile, dob, profileHeader, dp")
             ->find($userId);
+        /* if (isset($user["dob"])) {
+            $user["dob"] = date("d-m-Y", strtotime($user["dob"]));
+        } */
 
-        $user["metadata"] = $this->userMeta->select("dp, profileHeader, experience, education, profileViews")->where("userId", $userId)->find();
+        $user["metadata"] = $this->userMeta->select("experience, education, profileViews")->where("userId", $userId)->first();
 
         return $this->respond([
             "success" => true,
@@ -88,6 +92,9 @@ class User extends ResourceController
             }
             $dataToUpdate[$feild] = $newValue;
         }
+        /* if (isset($dataToUpdate["dob"])) {
+            $dataToUpdate["dob"] = date("d-m-Y", strtotime($dataToUpdate["dob"]));
+        } */
 
         if (count(array_keys($dataToUpdate)) === 0) {
             return $this->respond([
@@ -98,12 +105,15 @@ class User extends ResourceController
         $fieldToUpdate = array_keys($dataToUpdate);
         $validationRules = Auth::getRegistrationRules($fieldToUpdate);
 
-        $goodToGo = $this->validate($validationRules);
-        if (!$goodToGo) {
-            return $this->respond([
-                "message" => "Validation errors occurred.",
-                "errors" => $this->validator->getErrors(),
-            ], 400);
+        $this->validator->setRules($validationRules);
+        $goodToGo = $this->validator->run($dataToUpdate);
+        if (!$dataToUpdate["dp"]) {
+            if (!$goodToGo) {
+                return $this->respond([
+                    "message" => "Validation errors occurred.",
+                    "errors" => $this->validator->getErrors(),
+                ], 400);
+            }
         }
 
 
@@ -220,6 +230,9 @@ class User extends ResourceController
         }, $csvToArray[0]);
         array_shift($csvToArray);
         $usersWithoutKeys = $csvToArray;
+        $usersWithoutKeys = array_filter($usersWithoutKeys, function ($userData) {
+            return !is_null($userData[0]) && count($userData) !== 1;
+        });
         $users = [];
         foreach ($usersWithoutKeys as $value) {
             $user = [];
@@ -388,6 +401,15 @@ class User extends ResourceController
         return $this->respond([
             "success" => true,
             'message' => "User Deleted Sucessfully!",
+        ], 200);
+    }
+    public function connections()
+    {
+        $userId = $this->request->getHeaderLine("pc_user_id");
+        $users = $this->userModel->select("firstName, lastName")->where("id !=", $userId)->limit(5)->find();
+        return $this->respond([
+            "success" => true,
+            "data" => $users
         ], 200);
     }
 }

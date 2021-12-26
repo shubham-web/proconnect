@@ -23,4 +23,7 @@ export class PostsService {
   getConnections() {
     return this.api.securedGet(this.api.getEndpoint('connections'));
   }
+  likePost(postId: number) {
+    return this.api.securedGet(this.api.getEndpoint(`post/like/${postId}`));
+  }
 }

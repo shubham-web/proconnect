@@ -19,6 +19,9 @@ class UsersSeeder extends Seeder
             ["Aliya", "Parveen", "aliya@indiaskills.com"],
             ["Aashish Kumar", "Verma", "aashish@indiaskills.com"],
             ["Pritam", "Das", "pritam@indiaskills.com"],
+
+            ["john", "doe", "john@doe.com"],
+            ["david", "parker", "david@parker.com"],
         ];
         $data = [];
         foreach ($dummyUsers as $user) {

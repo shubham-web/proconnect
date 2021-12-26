@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  emailOrMobile: string = 'pritam@indiaskills.com';
-  password: string = 'pritam_secret';
+  emailOrMobile: string = 'shubham@indiaskills.com';
+  password: string = 'shubham_secret';
   fetching: boolean = false;
 
   constructor(
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         });
       })
       .catch((errResp) => {
-        this.sb.open(errResp.error.message, '', {
+        this.sb.open(errResp.error.message || 'Something went wrong!', '', {
           duration: 3000,
           horizontalPosition: 'center',
           verticalPosition: 'bottom',

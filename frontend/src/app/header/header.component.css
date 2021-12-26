@@ -1,5 +1,6 @@
 .pc_header {
-  position: relative;
+  position: sticky;
+  top: 0;
   background: white;
   color: #262626;
   display: grid;
@@ -7,6 +8,7 @@
   justify-content: space-between;
   height: 80px;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 .left {
   justify-self: start;

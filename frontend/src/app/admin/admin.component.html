@@ -1,0 +1,44 @@
+<app-authcheck role="ADMIN" redirectIfFails>
+  <div class="admincards">
+    <div></div>
+    <mat-card>
+      <mat-card-title-group>
+        <mat-card-title>Users</mat-card-title>
+        <mat-card-subtitle>Total 10 Users</mat-card-subtitle>
+        <img
+          mat-card-sm-image
+          src="https://iconarchive.com/download/i2403/aha-soft/software/user-group.ico"
+          width="50px"
+        />
+      </mat-card-title-group>
+      <mat-card-actions>
+        <a routerLink="/admin/users" color="primary" mat-raised-button
+          >Manage Users</a
+        >
+        <button (click)="export('users')" color="accent" mat-raised-button>
+          Export Users
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <mat-card>
+      <mat-card-title-group>
+        <mat-card-title>Posts</mat-card-title>
+        <mat-card-subtitle>6 Posts Today</mat-card-subtitle>
+        <img
+          mat-card-sm-image
+          src="https://cdn-icons-png.flaticon.com/512/1999/1999310.png"
+          width="50px"
+        />
+      </mat-card-title-group>
+      <mat-card-actions>
+        <a routerLink="/admin/posts" color="primary" mat-raised-button
+          >Manage Posts</a
+        >
+        <button (click)="export('posts')" color="accent" mat-raised-button>
+          Export Posts
+        </button>
+      </mat-card-actions>
+    </mat-card>
+    <div></div>
+  </div>
+</app-authcheck>

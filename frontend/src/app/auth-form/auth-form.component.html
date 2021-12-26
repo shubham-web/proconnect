@@ -1,5 +1,8 @@
 <div class="authForm">
-  <ng-content></ng-content>
+  <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+  <div class="padded">
+    <ng-content></ng-content>
+  </div>
 </div>
 <div class="center">
   <button color="primary" mat-button>Need Help?</button>

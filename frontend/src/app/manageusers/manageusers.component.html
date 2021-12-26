@@ -1,0 +1,78 @@
+<app-authcheck role="ADMIN" redirectIfFails>
+  <app-sectionheader title="Manage Users"> </app-sectionheader>
+
+  <ng-container *ngIf="users">
+    <div class="statistics">
+      <div>
+        <h2>Total Users: {{ total }}</h2>
+      </div>
+      <div class="right">
+        <button (click)="import()" mat-raised-button>Import CSV</button>
+        <button (click)="export()" mat-raised-button>Export CSV</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Registered</th>
+        <th>Actions</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users; index as serial">
+          <td>{{ serial + 1 + (currentPage - 1) * pageSize }}</td>
+          <td>{{ user.firstName }} {{ user.lastName }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.status }}</td>
+          <td>{{ formatDate(user.createdAt) }}</td>
+          <td>
+            <button
+              [matMenuTriggerFor]="userOptions"
+              class="actionButton"
+              color="warn"
+              mat-mini-fab
+            >
+              <div class="threeDots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </button>
+            <mat-menu #userOptions="matMenu">
+              <ng-container *ngIf="user.status === 'VERIFIED'">
+                <button
+                  (click)="toggleStatus(user.id)"
+                  color="warn"
+                  mat-menu-item
+                >
+                  Suspend User
+                </button>
+              </ng-container>
+              <ng-container *ngIf="user.status === 'SUSPENDED'">
+                <button
+                  (click)="toggleStatus(user.id)"
+                  color="warn"
+                  mat-menu-item
+                >
+                  Mark as Verified
+                </button>
+              </ng-container>
+              <button (click)="deleteUser(user.id)" mat-menu-item>
+                Delete User
+              </button>
+            </mat-menu>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <mat-paginator
+      (page)="onPageChange($event)"
+      hidePageSize
+      [length]="total"
+      [pageSize]="pageSize"
+    ></mat-paginator>
+  </ng-container>
+</app-authcheck>

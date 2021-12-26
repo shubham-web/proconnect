@@ -1,0 +1,7 @@
+.actions {
+  display: grid;
+  grid-template-columns: 8fr 2fr;
+}
+.actions > *:last-child {
+  justify-self: end;
+}

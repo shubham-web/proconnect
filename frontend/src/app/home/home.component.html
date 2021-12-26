@@ -1,1 +1,10 @@
-<div class="mat-display-3">Homepage</div>
+<div>
+  <div class="mat-display-1">
+    Max retry {{ app.retryCount }}, Interval {{ app.interval }}
+  </div>
+  <div class="logs">
+    <ol>
+      <li *ngFor="let log of app.logs">{{ log }}</li>
+    </ol>
+  </div>
+</div>

@@ -20,6 +20,10 @@ import { FeedComponent } from './feed/feed.component';
 import { AuthcheckComponent } from './authcheck/authcheck.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component';
+import { ManageusersComponent } from './manageusers/manageusers.component';
+import { SectionheaderComponent } from './sectionheader/sectionheader.component';
+import { CreatenewpostComponent } from './createnewpost/createnewpost.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,10 @@ import { ProfileComponent } from './profile/profile.component';
     AuthcheckComponent,
     PageNotFoundComponent,
     ProfileComponent,
+    AdminComponent,
+    ManageusersComponent,
+    SectionheaderComponent,
+    CreatenewpostComponent,
   ],
   imports: [
     BrowserModule,

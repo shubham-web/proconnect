@@ -1,7 +1,17 @@
 <app-authcheck role="USER" redirectIfFails>
   <mat-spinner *ngIf="dataLoaded === false"></mat-spinner>
   <mat-card class="profileSections" *ngIf="dataLoaded === true">
-    <mat-card-title>Basic Details</mat-card-title>
+    <mat-card-title
+      >Basic Details<button
+        *ngIf="!editMode"
+        color="primary"
+        mat-raised-button
+        (click)="editMode = !editMode"
+      >
+        Edit
+      </button>
+    </mat-card-title>
+
     <mat-divider></mat-divider>
     <mat-card-content>
       <div class="basicDetails">
@@ -12,23 +22,77 @@
               alt=""
             />
           </div>
-          <button mat-raised-button>Change Profile Picture</button>
+
+          <button *ngIf="editMode" mat-raised-button>
+            Change Profile Picture
+          </button>
         </div>
         <div class="details">
+          <mat-form-field>
+            <mat-label>Profile Header</mat-label>
+            <input
+              matInput
+              placeholder="Title at Company"
+              [(ngModel)]="profileData.profileHeader"
+              [readonly]="!editMode"
+            />
+          </mat-form-field>
           <mat-form-field>
             <mat-label>First Name</mat-label>
             <input
               matInput
               placeholder="First Name"
-              [(ngModel)]="basicDetails.firstName"
+              [(ngModel)]="profileData.firstName"
+              [readonly]="!editMode"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Last Name</mat-label>
+            <input
+              matInput
+              placeholder="Last Name"
+              [(ngModel)]="profileData.lastName"
+              [readonly]="!editMode"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Date of Birth</mat-label>
+            <input
+              type="date"
+              matInput
+              placeholder=""
+              [(ngModel)]="profileData.dob"
+              [readonly]="!editMode"
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input
+              type="email"
+              matInput
+              placeholder="Email"
+              [(ngModel)]="profileData.email"
+              disabled
+            />
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Mobile</mat-label>
+            <input
+              type="mobile"
+              matInput
+              placeholder="mobile"
+              [(ngModel)]="profileData.mobile"
+              disabled
             />
           </mat-form-field>
         </div>
       </div>
     </mat-card-content>
-    <mat-card-actions>
-      <button color="primary" mat-button>Cancel</button>
-      <button color="primary" mat-raised-button>Save</button>
+    <mat-card-actions *ngIf="editMode">
+      <button (click)="cancelEdits()" color="primary" mat-button>Cancel</button>
+      <button (click)="saveEdits()" color="primary" mat-raised-button>
+        Save
+      </button>
     </mat-card-actions>
   </mat-card>
 </app-authcheck>

@@ -1,0 +1,50 @@
+.feed {
+  display: grid;
+  grid-template-columns: 2fr 6fr 2fr;
+  grid-template-rows: 1fr;
+  gap: 1rem;
+  max-width: 80vw;
+  margin: 0 auto;
+}
+.center {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.posts {
+  display: grid;
+  gap: 2rem;
+}
+.example-header-image {
+  background-size: cover;
+}
+
+.media {
+  display: flex;
+  overflow: auto;
+  gap: 1rem;
+}
+.media > * {
+  max-width: 100%;
+  border-radius: 8px;
+}
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.right {
+  display: grid;
+  gap: 1rem;
+  grid-template-rows: 40px min-content;
+}
+.connection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+.connections {
+  display: grid;
+  gap: 1rem;
+}

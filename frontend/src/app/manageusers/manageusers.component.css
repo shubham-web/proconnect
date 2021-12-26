@@ -1,0 +1,33 @@
+.threeDots {
+  display: grid;
+  gap: 2px;
+}
+.threeDots span {
+  padding: 2px;
+  background: #262626;
+  border-radius: 50%;
+}
+.actionButton {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: white;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+
+.statistics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 80vw;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.statistics h2 {
+  margin: 0;
+}
+.statistics .right {
+  display: flex;
+  justify-content: right;
+  gap: 1rem;
+}

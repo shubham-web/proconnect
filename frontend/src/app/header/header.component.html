@@ -1,6 +1,12 @@
 <mat-toolbar class="pc_header" color="primary">
   <div class="left">
-    <app-logo></app-logo>
+    <app-logo
+      [link]="
+        auth.isLoggedIn() && auth.getCurrentUser().role === 'ADMIN'
+          ? '/admin'
+          : '/'
+      "
+    ></app-logo>
   </div>
   <div class="center"></div>
   <div class="right" *ngIf="auth.isLoggedIn() === false">
@@ -9,9 +15,13 @@
   </div>
   <div class="right" *ngIf="auth.isLoggedIn() === true">
     Hi {{ auth.getCurrentUser().firstName }}!
-    <button mat-fab color="primary" [matMenuTriggerFor]="headerMenu">P</button>
+    <button mat-mini-fab color="primary" [matMenuTriggerFor]="headerMenu">
+      P
+    </button>
     <mat-menu #headerMenu="matMenu">
-      <a mat-menu-item routerLink="/profile">Profile</a>
+      <ng-container *ngIf="auth.getCurrentUser().role === 'USER'">
+        <a mat-menu-item routerLink="/profile">Profile</a>
+      </ng-container>
       <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
   </div>

@@ -14,3 +14,44 @@ body {
   background: tomato;
   color: white;
 }
+.sb_success {
+  background: #46bc62;
+  color: white;
+}
+
+table {
+  margin: 0 auto;
+  background: white;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border-collapse: collapse;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  min-width: 80vw;
+}
+
+table thead {
+  border-bottom: 1px solid #e5e5e5;
+}
+table tr > td,
+table thead th {
+  padding: 1rem;
+}
+table thead th {
+  text-align: left;
+  color: #262626;
+  text-transform: uppercase;
+  font-weight: normal;
+}
+table tr:nth-child(even) {
+  background: #f6f6f6;
+}
+
+@media screen and (max-width: 768px) {
+  table tr > td,
+  table thead th {
+    padding: 0.2rem;
+  }
+}
+.w100 {
+  width: 100%;
+}

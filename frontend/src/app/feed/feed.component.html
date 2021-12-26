@@ -1,3 +1,85 @@
 <app-authcheck role="USER" redirectIfFails>
-  <p>feed works!</p>
+  <div class="feed">
+    <div class="left" *ngIf="auth.isLoggedIn()">
+      <mat-card>Hi {{ auth.getCurrentUser().firstName }}!</mat-card>
+    </div>
+    <div class="center">
+      <app-createnewpost></app-createnewpost>
+      <br /><br />
+      <mat-divider></mat-divider>
+      <br /><br />
+      <div class="posts">
+        <ng-container *ngIf="posts.length === 0">
+          <mat-card>There are no posts on your feed.</mat-card>
+        </ng-container>
+        <mat-card class="example-card" *ngFor="let post of posts">
+          <mat-card-header>
+            <div
+              [style.background-image]="'url(' + userUri + ')'"
+              mat-card-avatar
+              class="example-header-image"
+            ></div>
+            <mat-card-title
+              >{{ post.user.firstName }}
+              {{ post.user.lastName }}</mat-card-title
+            >
+            <mat-card-subtitle>{{ post.user.profileHeader }}</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              {{ post.text }}
+            </p>
+          </mat-card-content>
+          <div
+            class="media"
+            *ngIf="
+              (post.media && post.media.images.length) ||
+              post.media.video.length
+            "
+          >
+            <img
+              [src]="getServerUrl(image.url)"
+              alt="Image video"
+              *ngFor="let image of post.media.images"
+            />
+            <video
+              [controls]="true"
+              [muted]="true"
+              [autoplay]="true"
+              [src]="getServerUrl(video.url)"
+              alt="Post video"
+              *ngFor="let video of post.media.video"
+            ></video>
+          </div>
+          <br />
+          <mat-divider></mat-divider>
+          <mat-card-actions class="actions">
+            <div>
+              <button mat-button>LIKE</button>
+              <span mat-caption>{{ post.likes }}</span>
+            </div>
+            <div *ngIf="post.selfPost">
+              <button (click)="deletePost(post.id)" mat-stroked-button>
+                Delete
+              </button>
+            </div>
+            <div *ngIf="!post.selfPost">
+              <span mat-caption>{{ post.createdAt }}</span>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <div class="right">
+      <h1 *ngIf="connections.length > 0">You may know</h1>
+      <div class="connections">
+        <mat-card *ngFor="let connection of connections">
+          <mat-card-actions class="connection">
+            <div>{{ connection.firstName }}</div>
+            <button mat-stroked-button>Connect</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
 </app-authcheck>

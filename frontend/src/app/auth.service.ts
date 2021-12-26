@@ -3,12 +3,17 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { ApiService } from './api.service';
 import { BrowserstorageService } from './browserstorage.service';
 import { SessionService } from './session.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private api: ApiService) {}
+  constructor(
+    private http: HttpClient,
+    private api: ApiService,
+    private sb: MatSnackBar
+  ) {}
   authUpdated = new EventEmitter();
   isLoggedIn() {
     return !!this.getCurrentUser();
@@ -21,7 +26,7 @@ export class AuthService {
   getCurrentUser() {
     return SessionService.getItem('currentUser');
   }
-  userCheck() {
+  userCheck(forceRefresh = false) {
     return new Promise((resolve) => {
       let token = BrowserstorageService.getItem('token');
       if (!token) {
@@ -31,7 +36,7 @@ export class AuthService {
       }
 
       let currentUser = SessionService.getItem('currentUser');
-      if (currentUser) {
+      if (currentUser && !forceRefresh) {
         resolve(currentUser);
         return;
       }
@@ -43,6 +48,13 @@ export class AuthService {
         })
         .catch((errResp) => {
           console.debug(errResp);
+          this.sb.open(errResp.error.message || 'Something went wrong!', '', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+            panelClass: 'sb_error',
+          });
+          this.logout();
           resolve(null);
         });
     });

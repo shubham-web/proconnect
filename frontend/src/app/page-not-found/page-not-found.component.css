@@ -1,0 +1,10 @@
+.mat-display-2 {
+  display: grid;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}

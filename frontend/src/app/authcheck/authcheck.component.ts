@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -20,6 +21,9 @@ export class AuthcheckComponent implements OnInit {
       return;
     }
     this.authorized = this.role === currentUser?.role;
+    if (!this.authorized) {
+      this.handleFailure();
+    }
   }
   handleFailure() {
     if (this.redirectIfFails === false) {

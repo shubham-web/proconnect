@@ -15,4 +15,13 @@ export class ProfileService {
       })
       .toPromise();
   }
+  saveProfile(updatedData) {
+    return this.http
+      .put(this.api.getEndpoint('profile'), updatedData, {
+        headers: {
+          ...this.api.getAuthHeaders(),
+        },
+      })
+      .toPromise();
+  }
 }

@@ -1,6 +1,8 @@
-<div class="mat-display-3">
+<div class="mat-display-2">
   <div>404 - Page Not Found</div>
   <h1>The page you were looking for wasn't found.</h1>
-  <button mat-raised-button color="primary">Home</button>
-  <button mat-button>Go Back</button>
+  <div class="buttons">
+    <button (click)="goHome()" mat-raised-button color="primary">Home</button>
+    <button (click)="goBack()" mat-button>Go Back</button>
+  </div>
 </div>

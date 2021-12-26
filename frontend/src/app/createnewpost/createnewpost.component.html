@@ -1,0 +1,33 @@
+<mat-card>
+  <div *ngIf="posting">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    <br />
+  </div>
+  <mat-card-title>Create New Post </mat-card-title>
+  <mat-card-content>
+    <mat-form-field class="w100" appearance="outline">
+      <mat-label>Text</mat-label>
+      <textarea [(ngModel)]="text" rows="5" matInput></textarea>
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions class="actions">
+    <div *ngIf="media.images.length === media.video.length">
+      <button (click)="addMedia('images')" mat-stroked-button>Add Photo</button>
+      <button (click)="addMedia('video')" mat-stroked-button>Add Video</button>
+    </div>
+    <div *ngIf="media.images.length !== media.video.length">
+      <span class="mediaStatus" *ngIf="media.images.length > 0">
+        {{ media.images.length }} Photos Added
+      </span>
+      <span class="mediaStatus" *ngIf="media.video.length > 0">
+        {{ media.video.length }} Video Added
+      </span>
+      <button (click)="clearMedia()" color="warn" mat-flat-button>Clear</button>
+    </div>
+    <div>
+      <button (click)="publishPost()" color="primary" mat-raised-button>
+        Post
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>

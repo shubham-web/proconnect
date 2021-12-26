@@ -1,4 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppTitleService } from '../app-title.service';
 
 @Component({
@@ -7,8 +9,18 @@ import { AppTitleService } from '../app-title.service';
   styleUrls: ['./page-not-found.component.css'],
 })
 export class PageNotFoundComponent implements OnInit {
-  constructor(private app: AppTitleService) {}
+  constructor(
+    private app: AppTitleService,
+    private route: Router,
+    private location: Location
+  ) {}
 
+  goBack() {
+    this.location.back();
+  }
+  goHome() {
+    this.route.navigateByUrl('/');
+  }
   ngOnInit(): void {
     this.app.setTitle('Page not found');
   }

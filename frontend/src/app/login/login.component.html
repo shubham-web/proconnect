@@ -1,4 +1,4 @@
-<app-auth-form>
+<app-auth-form [loading]="fetching === true">
   <form (ngSubmit)="submitForm()">
     <h1>Welcome Back!</h1>
     <h3>Sign in to continue to ProConnect!</h3>

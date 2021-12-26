@@ -1,0 +1,8 @@
+<div class="header">
+  <div class="left">
+    <button (click)="goBack()" color="primary" mat-mini-fab>&larr;</button>
+    <h1>{{ title }}</h1>
+  </div>
+
+  <ng-content select=".right"></ng-content>
+</div>

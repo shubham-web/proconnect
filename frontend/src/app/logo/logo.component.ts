@@ -7,6 +7,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class LogoComponent implements OnInit {
   @Input('link') link = '/';
+  @Input('footer') footer = false;
   constructor() {}
 
   ngOnInit(): void {}

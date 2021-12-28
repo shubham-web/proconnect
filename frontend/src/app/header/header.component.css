@@ -1,6 +1,6 @@
 .pc_header {
   position: sticky;
-  top: 0;
+  top: 0px;
   background: white;
   color: #262626;
   display: grid;

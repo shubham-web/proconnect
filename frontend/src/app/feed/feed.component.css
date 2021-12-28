@@ -37,6 +37,12 @@
   gap: 1rem;
   grid-template-rows: 40px min-content;
 }
+.left,
+.right {
+  height: 90vh;
+  position: sticky;
+  top: 100px;
+}
 .connection {
   display: flex;
   justify-content: space-between;

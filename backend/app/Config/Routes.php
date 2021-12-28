@@ -88,6 +88,8 @@ $routes->group("/post", ["filter" => "checkauth:USER"], function ($routes) {
 });
 
 $routes->add("/beat", "Home::index");
+$routes->get("/countries", "Home::getCountries");
+$routes->post("/user-exists", "Auth::userExistsApi");
 
 // 404 route
 $routes->add("/(:any)", "Auth::noRoute");

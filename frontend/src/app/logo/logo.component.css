@@ -2,3 +2,8 @@
   width: 160px;
   display: block;
 }
+
+.logoImg.footerLogo {
+  width: 100px;
+  filter: grayscale(1);
+}

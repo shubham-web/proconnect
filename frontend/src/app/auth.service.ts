@@ -69,4 +69,9 @@ export class AuthService {
   login(data: {}) {
     return this.http.post(this.api.getEndpoint('login'), data).toPromise();
   }
+  userExists(email: string) {
+    return this.http
+      .post(this.api.getEndpoint('/user-exists'), { email: email })
+      .toPromise();
+  }
 }

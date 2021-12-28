@@ -144,9 +144,9 @@ export class ProfileComponent implements OnInit, OnChanges {
     input.click();
   }
   addEducation() {
-    this.toastr.success('Changes Saved Successfully!', 'Success');
+    /* this.toastr.success('Changes Saved Successfully!', 'Success');
 
-    Logger.log('Changes Saved!!');
+    Logger.log('Changes Saved!!'); */
   }
   stringify(anything: any) {
     return JSON.stringify(anything);

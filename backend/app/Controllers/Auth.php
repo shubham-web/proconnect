@@ -222,4 +222,14 @@ class Auth extends ResourceController
             "message" => "No such api endpoint found."
         ]);
     }
+    public function userExistsApi()
+    {
+        $email = $this->request->getJsonVar("email");
+        return $this->respond([
+            "success" => true,
+            "data" => [
+                "alreadyExists" => !!$this->userExists($email),
+            ]
+        ]);
+    }
 }

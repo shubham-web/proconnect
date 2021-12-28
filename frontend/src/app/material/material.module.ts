@@ -12,6 +12,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatStepperModule } from '@angular/material/stepper';
+import { MatSelectModule } from '@angular/material/select';
 
 const MaterialComponents = [
   MatToolbarModule,
@@ -27,6 +29,8 @@ const MaterialComponents = [
   MatGridListModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
+  MatStepperModule,
+  MatSelectModule,
 ];
 
 @NgModule({

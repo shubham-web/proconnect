@@ -1,8 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Title } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
 import { ApiService } from '../api.service';
 import { AppTitleService } from '../app-title.service';
 import { AuthService } from '../auth.service';
@@ -15,7 +12,7 @@ import { ProfileService } from '../profile.service';
   styleUrls: ['./feed.component.css'],
 })
 export class FeedComponent implements OnInit {
-  pageSize = 10;
+  pageSize = 5;
   currentPage = 1;
   posts = [];
   connections = [];
@@ -24,10 +21,10 @@ export class FeedComponent implements OnInit {
     private app: AppTitleService,
     public auth: AuthService,
     private postService: PostsService,
-    private profileService: ProfileService,
+    public profileService: ProfileService,
     public api: ApiService
   ) {}
-  userUri = 'https://bellfund.ca/wp-content/uploads/2018/03/demo-user.jpg';
+
   ngOnInit(): void {
     this.app.setTitle('Feed');
     this.fetchPosts();
@@ -36,11 +33,23 @@ export class FeedComponent implements OnInit {
       this.fetchPosts();
     });
   }
+  @HostListener('window:scroll')
+  onScrollHandler() {
+    let currentPosition =
+      document.documentElement.scrollTop +
+      document.documentElement.offsetHeight;
+    let maxHeight = document.documentElement.scrollHeight;
+
+    if (currentPosition >= maxHeight) {
+      this.currentPage++;
+      this.fetchPosts();
+    }
+  }
   fetchPosts() {
     this.postService
       .getFeedPosts(this.pageSize, this.currentPage)
       .then((response: any) => {
-        this.posts = this.filterPosts(response.data);
+        this.posts.push(...this.filterPosts(response.data));
       });
   }
   fetchConnections() {

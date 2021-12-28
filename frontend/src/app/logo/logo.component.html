@@ -1,3 +1,7 @@
 <a [routerLink]="link">
-  <img src="assets/logo.svg" alt="logo" class="logoImg" />
+  <img
+    src="assets/logo.svg"
+    alt="logo"
+    [ngClass]="footer ? 'logoImg footerLogo' : 'logoImg'"
+  />
 </a>

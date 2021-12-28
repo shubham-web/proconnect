@@ -1,8 +1,9 @@
 .pc_page {
   padding: 2rem;
-  background: url("/assets/beanstalk.png");
+  background: url("/assets/double-bubble-outline.jpg");
   min-height: calc(
     100vh - 80px - 60px
   ); /* page size - headerHeight - footerHeight  */
   box-sizing: border-box;
+  background-attachment: fixed;
 }

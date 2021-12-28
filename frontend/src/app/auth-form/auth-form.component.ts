@@ -9,7 +9,5 @@ export class AuthFormComponent implements OnInit {
   @Input('loading') loading: boolean = false;
   constructor() {}
 
-  ngOnInit(): void {
-    console.log(this.loading);
-  }
+  ngOnInit(): void {}
 }

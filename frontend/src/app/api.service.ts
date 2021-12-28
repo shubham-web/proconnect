@@ -59,4 +59,8 @@ export class ApiService {
   getServerUrl(path: string) {
     return environment.serverAssets.concat(path);
   }
+
+  getCountries() {
+    return this.http.get(this.getEndpoint('countries')).toPromise();
+  }
 }

@@ -1,1 +1,104 @@
-<p>register works!</p>
+<app-auth-form [loading]="fetching === true">
+  <form (ngSubmit)="submitForm()">
+    <ng-container *ngIf="currentStep === 1">
+      <h1>Create an Account!</h1>
+      <h3>Make the most of your professional life.</h3>
+    </ng-container>
+    <ng-container *ngIf="currentStep === 2">
+      <h1>You're almost done!</h1>
+      <h3>Just fill these details, your feed is waiting.</h3>
+    </ng-container>
+
+    <ng-container *ngIf="currentStep === 1">
+      <div class="formInput">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input
+            [(ngModel)]="email"
+            matInput
+            name="email"
+            placeholder="eg. aakash.kumar@email.com"
+          />
+        </mat-form-field>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="currentStep === 2">
+      <div class="formInput twoInputs">
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input
+            [(ngModel)]="firstName"
+            matInput
+            name="firstName"
+            placeholder="First Name"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input
+            [(ngModel)]="lastName"
+            matInput
+            name="lastName"
+            placeholder="Last Name"
+          />
+        </mat-form-field>
+      </div>
+      <div class="formInput twoInputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <input
+            type="date"
+            [(ngModel)]="dob"
+            matInput
+            name="dob"
+            placeholder="dob"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Country</mat-label>
+          <mat-select name="country" value="101">
+            <mat-option
+              *ngFor="let country of countries"
+              [value]="country.id"
+              >{{ country.name }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="formInput twoInputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            [(ngModel)]="password"
+            type="password"
+            name="password"
+            matInput
+          />
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input
+            [(ngModel)]="confpassword"
+            type="password"
+            name="confpassword"
+            matInput
+          />
+        </mat-form-field>
+      </div>
+    </ng-container>
+    <div class="formInput">
+      <button color="primary" type="submit" mat-raised-button>
+        {{ currentStep === 1 ? "Proceed" : "Register" }}
+      </button>
+      <ng-container *ngIf="currentStep === 2">
+        <button (click)="changeEmail()" mat-flat-button>
+          <span class="mat-caption">&larr; Change Email</span>
+        </button>
+      </ng-container>
+    </div>
+  </form>
+  <br />
+  <!-- <div class="links">
+      <a mat-flat-button routerLink="/register">Create an Account</a>
+    </div> -->
+</app-auth-form>
